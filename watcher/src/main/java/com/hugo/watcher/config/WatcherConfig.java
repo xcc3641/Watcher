@@ -25,12 +25,29 @@ public class WatcherConfig implements Parcelable {
      */
     public boolean enableMemory = true;
 
+    /**
+     * 位置
+     */
+    @Seat
+    public int seat = Seat.BOTTOM_LEFT;
+
     @IntDef({
-        Seat.TOP_RIGHT
+        Seat.TOP_RIGHT, Seat.TOP_LEFT, Seat.TOP_CENTER, Seat.BOTTOM_RIGHT, Seat.BOTTOM_LEFT, Seat.BOTTOM_CENTER,
+        Seat.RIGHT_CENTER, Seat.LEFT_CENTER, Seat.CENTER
     })
     @Retention(RetentionPolicy.SOURCE)
     public @interface Seat {
         int TOP_RIGHT = Gravity.TOP | Gravity.END;
+        int TOP_LEFT = Gravity.TOP | Gravity.START;
+        int TOP_CENTER = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+
+        int BOTTOM_RIGHT = Gravity.BOTTOM | Gravity.END;
+        int BOTTOM_LEFT = Gravity.BOTTOM | Gravity.START;
+        int BOTTOM_CENTER = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
+
+        int RIGHT_CENTER = Gravity.END | Gravity.CENTER_VERTICAL;
+        int LEFT_CENTER = Gravity.START | Gravity.CENTER_VERTICAL;
+        int CENTER = Gravity.CENTER;
     }
 
     public WatcherConfig() {
@@ -46,12 +63,14 @@ public class WatcherConfig implements Parcelable {
         dest.writeByte(this.isDebug ? (byte) 1 : (byte) 0);
         dest.writeByte(this.enableFps ? (byte) 1 : (byte) 0);
         dest.writeByte(this.enableMemory ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.seat);
     }
 
     protected WatcherConfig(Parcel in) {
         this.isDebug = in.readByte() != 0;
         this.enableFps = in.readByte() != 0;
         this.enableMemory = in.readByte() != 0;
+        this.seat = in.readInt();
     }
 
     public static final Creator<WatcherConfig> CREATOR = new Creator<WatcherConfig>() {

@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.hugo.watcher.config.Seat;
 import com.hugo.watcher.config.WatcherConfig;
 import com.hugo.watcher.config.WatcherListener;
 import com.hugo.watcher.monitor.FpsMonitor;
@@ -73,7 +72,7 @@ public class WatcherService extends Service {
         layoutParams.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
             | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
         layoutParams.format = PixelFormat.TRANSLUCENT;
-        layoutParams.gravity = Seat.BOTTOM_LEFT.getGravity();
+        layoutParams.gravity = mWatcherConfig.seat;
 
         LayoutInflater inflater = LayoutInflater.from(this);
         LinearLayout parent = new LinearLayout(this);
