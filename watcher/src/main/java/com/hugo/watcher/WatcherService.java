@@ -21,7 +21,7 @@ import com.hugo.watcher.monitor.FpsMonitor;
 import com.hugo.watcher.monitor.MemoryMonitor;
 import java.text.DecimalFormat;
 
-public class JWatcherService extends Service {
+public class WatcherService extends Service {
 
     private final DecimalFormat mFpsFormat = new DecimalFormat("#.0' fps'");
     private final DecimalFormat mMemoryFormat = new DecimalFormat("#.00' MB'");

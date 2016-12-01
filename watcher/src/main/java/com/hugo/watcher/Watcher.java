@@ -7,7 +7,7 @@ import com.hugo.watcher.config.WatcherConfig;
 public class Watcher {
 
     private WatcherConfig mWatcherConfig;
-    private boolean hasStarted;
+    private boolean mHasStarted;
     private static final Watcher INSTANCE = new Watcher();
 
     private Watcher() {
@@ -31,10 +31,10 @@ public class Watcher {
             return;
         }
 
-        Intent intent = new Intent(context, JWatcherService.class);
+        Intent intent = new Intent(context, WatcherService.class);
         intent.putExtra(WatcherConfig.CONFIG_KEY, mWatcherConfig);
         context.startService(intent);
-        hasStarted = true;
+        mHasStarted = true;
     }
 
     public void stop(Context context) {
@@ -42,8 +42,8 @@ public class Watcher {
             return;
         }
 
-        if (hasStarted) {
-            context.stopService(new Intent(context, JWatcherService.class));
+        if (mHasStarted) {
+            context.stopService(new Intent(context, WatcherService.class));
         }
     }
 

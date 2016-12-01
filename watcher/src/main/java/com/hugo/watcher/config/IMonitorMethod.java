@@ -1,7 +1,7 @@
 package com.hugo.watcher.config;
 
 
-public interface MonitorTimeMethod {
+public interface IMonitorMethod {
 
     void start();
 

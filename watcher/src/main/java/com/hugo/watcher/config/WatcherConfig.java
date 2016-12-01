@@ -2,6 +2,10 @@ package com.hugo.watcher.config;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.IntDef;
+import android.view.Gravity;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 public class WatcherConfig implements Parcelable {
 
@@ -20,6 +24,14 @@ public class WatcherConfig implements Parcelable {
      * 开启内存
      */
     public boolean enableMemory = true;
+
+    @IntDef({
+        Seat.TOP_RIGHT
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Seat {
+        int TOP_RIGHT = Gravity.TOP | Gravity.END;
+    }
 
     public WatcherConfig() {
     }
