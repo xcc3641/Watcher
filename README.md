@@ -1,5 +1,7 @@
 # Watcher
+[![](https://jitpack.io/v/xcc3641/watcher.svg)](https://jitpack.io/#xcc3641/watcher)
 
+---
 
 ![](http://ww1.sinaimg.cn/large/006y8lVagw1fabk6nf50eg30el05njrd.gif)
 
