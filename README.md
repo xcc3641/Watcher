@@ -22,7 +22,7 @@ allprojects {
 **Step 2.** Add the dependency
 ```gradle
 dependencies {
-	compile 'com.github.xcc3641:watcher:v1.0'
+	compile 'com.github.xcc3641:watcher:0.2'
 }
 ```
 
