@@ -1,8 +1,9 @@
 package com.hugo.watchersample;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import com.hugo.watcher.Watcher;
+import android.view.View;
 
 public class MainActivity extends Activity {
 
@@ -10,12 +11,17 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Watcher.getInstance().start(this);
+
+        findViewById(R.id.tv_content).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, TwoActivity.class));
+            }
+        });
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Watcher.getInstance().stop(this);
     }
 }

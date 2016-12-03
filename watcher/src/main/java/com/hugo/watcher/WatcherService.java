@@ -1,6 +1,7 @@
 package com.hugo.watcher;
 
 import android.app.ActivityManager;
+import android.app.Application;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.hugo.watcher.config.AppBackground;
 import com.hugo.watcher.config.WatcherConfig;
 import com.hugo.watcher.config.WatcherListener;
 import com.hugo.watcher.monitor.FpsMonitor;
@@ -49,6 +51,7 @@ public class WatcherService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         mWatcherConfig = intent.getParcelableExtra(WatcherConfig.CONFIG_KEY);
+        ((Application) getApplicationContext()).registerActivityLifecycleCallbacks(AppBackground.init(getApplication()));
         initView();
         if (mWatcherConfig == null) {
             mWatcherConfig = new WatcherConfig();

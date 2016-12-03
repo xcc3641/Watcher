@@ -33,23 +33,27 @@ dependencies {
 
 **Step 2.** Start the Watcher
 
-In your Activity/Application onCreate :
+In your Application onCreate :
 
 ```java
 @Override
-protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_main);
+public void onCreate() {
+	super.onCreate();
+	// default
 	Watcher.getInstance().start(this);
 }
 ```
 
-And dont forget to stop it :
+#### More configuration
 
 ```java
-@Override
-protected void onDestroy() {
-	super.onDestroy();
-	Watcher.getInstance().stop(this);
-}
+// custom
+WatcherConfig watcherConfig = new WatcherConfig();
+watcherConfig.enableFps = false;
+// ....
+Watcher.getInstance().setWatcherConfig(watcherConfig).start(this);
 ```
+
+**Step 3.** Enjoy it
+
+The Watcher will stop itself into the background

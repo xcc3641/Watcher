@@ -23,6 +23,10 @@ public class Watcher {
     }
 
     public void start(Context context) {
+        if (mHasStarted) {
+            return;
+        }
+
         if (mWatcherConfig == null) {
             mWatcherConfig = new WatcherConfig();
         }
@@ -43,8 +47,8 @@ public class Watcher {
         }
 
         if (mHasStarted) {
+            mHasStarted = false;
             context.stopService(new Intent(context, WatcherService.class));
         }
     }
-
 }

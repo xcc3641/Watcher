@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven' // 添 加 这 个
-version = "0.1"
+version = "0.2"
 
 group = 'com.github.xcc3641'
 
@@ -9,7 +9,7 @@ android {
     buildToolsVersion "25.0.1"
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
         versionName version
