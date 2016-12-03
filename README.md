@@ -58,4 +58,4 @@ Watcher.getInstance().setWatcherConfig(watcherConfig).start(this);
 
 **Step 3.** Enjoy it
 
-The Watcher will stop itself into the background
+The Watcher will stop itself when your app is in the background
