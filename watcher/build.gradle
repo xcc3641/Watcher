@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven' // 添 加 这 个
-version = "0.2"
+version = "0.3"
 
 group = 'com.github.xcc3641'
 
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 1
+        versionCode 3
         versionName version
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

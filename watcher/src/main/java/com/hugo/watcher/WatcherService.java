@@ -51,19 +51,20 @@ public class WatcherService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         mWatcherConfig = intent.getParcelableExtra(WatcherConfig.CONFIG_KEY);
-        ((Application) getApplicationContext()).registerActivityLifecycleCallbacks(AppBackground.init(getApplication()));
-        initView();
-        if (mWatcherConfig == null) {
-            mWatcherConfig = new WatcherConfig();
+
+        if (mWatcherConfig != null) {
+            ((Application) getApplicationContext()).registerActivityLifecycleCallbacks(AppBackground.init(getApplication()));
+
+            initView();
+            if (mWatcherConfig.enableFps) {
+                initFps();
+            }
+            if (mWatcherConfig.enableMemory) {
+                initMemory();
+            }
+            mHasInitialized = true;
         }
 
-        if (mWatcherConfig.enableFps) {
-            initFps();
-        }
-        if (mWatcherConfig.enableMemory) {
-            initMemory();
-        }
-        mHasInitialized = true;
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -73,7 +74,7 @@ public class WatcherService extends Service {
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.type = WindowManager.LayoutParams.TYPE_TOAST;
         layoutParams.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-            | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
+                | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
         layoutParams.format = PixelFormat.TRANSLUCENT;
         layoutParams.gravity = mWatcherConfig.seat;
 

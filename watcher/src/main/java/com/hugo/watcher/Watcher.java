@@ -7,7 +7,7 @@ import com.hugo.watcher.config.WatcherConfig;
 public class Watcher {
 
     private WatcherConfig mWatcherConfig;
-    private boolean mHasStarted;
+    private boolean mHasStarted = false;
     private static final Watcher INSTANCE = new Watcher();
 
     private Watcher() {
@@ -42,10 +42,6 @@ public class Watcher {
     }
 
     public void stop(Context context) {
-        if (!mWatcherConfig.isDebug) {
-            return;
-        }
-
         if (mHasStarted) {
             mHasStarted = false;
             context.stopService(new Intent(context, WatcherService.class));
