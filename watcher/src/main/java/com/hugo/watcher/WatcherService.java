@@ -10,6 +10,7 @@ import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -52,9 +53,8 @@ public class WatcherService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         mWatcherConfig = intent.getParcelableExtra(WatcherConfig.CONFIG_KEY);
 
-        if (mWatcherConfig != null) {
+        if (mWatcherConfig != null && !mHasInitialized) {
             ((Application) getApplicationContext()).registerActivityLifecycleCallbacks(AppBackground.init(getApplication()));
-
             initView();
             if (mWatcherConfig.enableFps) {
                 initFps();

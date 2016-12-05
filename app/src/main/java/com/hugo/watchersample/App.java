@@ -2,7 +2,6 @@ package com.hugo.watchersample;
 
 import android.app.Application;
 import com.hugo.watcher.Watcher;
-import com.hugo.watcher.config.WatcherConfig;
 
 public class App extends Application {
 
@@ -14,9 +13,9 @@ public class App extends Application {
         Watcher.getInstance().start(this);
 
         // custom
-        WatcherConfig watcherConfig = new WatcherConfig();
-        watcherConfig.enableFps = false;
-        // ....
-        Watcher.getInstance().setWatcherConfig(watcherConfig).start(this);
+//        WatcherConfig watcherConfig = new WatcherConfig();
+//        watcherConfig.enableFps = false;
+//        // ....
+//        Watcher.getInstance().setWatcherConfig(watcherConfig).start(this);
     }
 }

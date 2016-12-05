@@ -8,13 +8,16 @@ public class Watcher {
 
     private WatcherConfig mWatcherConfig;
     private boolean mHasStarted = false;
-    private static final Watcher INSTANCE = new Watcher();
 
     private Watcher() {
     }
 
     public static Watcher getInstance() {
-        return INSTANCE;
+        return SingletonHolder.Instance;
+    }
+
+    private static class SingletonHolder {
+        private static final Watcher Instance = new Watcher();
     }
 
     public Watcher setWatcherConfig(WatcherConfig watcherConfig) {
