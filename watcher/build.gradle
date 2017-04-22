@@ -1,20 +1,17 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven' // 添 加 这 个
-version = "0.3"
+apply plugin: 'com.github.dcendents.android-maven' // 添加这个
 
 group = 'com.github.xcc3641'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 25
-        versionCode 3
-        versionName version
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionName rootProject.ext.android.versionName
+        versionCode rootProject.ext.android.versionCode
     }
     buildTypes {
         release {
@@ -25,12 +22,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:25.3.1'
 }
 
 // 指定编码
