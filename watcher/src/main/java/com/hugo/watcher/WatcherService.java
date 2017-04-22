@@ -10,7 +10,6 @@ import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -21,12 +20,13 @@ import com.hugo.watcher.config.WatcherConfig;
 import com.hugo.watcher.config.WatcherListener;
 import com.hugo.watcher.monitor.FpsMonitor;
 import com.hugo.watcher.monitor.MemoryMonitor;
+
 import java.text.DecimalFormat;
 
 public class WatcherService extends Service {
 
-    private final DecimalFormat mFpsFormat = new DecimalFormat("#.0' fps'");
-    private final DecimalFormat mMemoryFormat = new DecimalFormat("#.00' MB'");
+    private final DecimalFormat mFpsFormat = new DecimalFormat("#0.0' fps'");
+    private final DecimalFormat mMemoryFormat = new DecimalFormat("#0.00' MB'");
 
     private WindowManager mWindowManager;
 
@@ -51,6 +51,9 @@ public class WatcherService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if (intent == null) {
+            return START_NOT_STICKY;
+        }
         mWatcherConfig = intent.getParcelableExtra(WatcherConfig.CONFIG_KEY);
 
         if (mWatcherConfig != null && !mHasInitialized) {
@@ -65,14 +68,15 @@ public class WatcherService extends Service {
             mHasInitialized = true;
         }
 
-        return super.onStartCommand(intent, flags, startId);
+        return START_NOT_STICKY;
     }
 
     private void initView() {
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        layoutParams.type = WindowManager.LayoutParams.TYPE_TOAST;
+//        layoutParams.type = WindowManager.LayoutParams.TYPE_TOAST; !!! See -->[](https://android.googlesource.com/platform/frameworks/base/+/dc24f93)
+        layoutParams.type = WindowManager.LayoutParams.TYPE_PHONE; // Make sure enable "Draw over other apps permission"
         layoutParams.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
         layoutParams.format = PixelFormat.TRANSLUCENT;
