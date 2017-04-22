@@ -3,7 +3,7 @@
 
 ---
 
-![](http://ww1.sinaimg.cn/large/006y8lVagw1fabk6nf50eg30el05njrd.gif)
+![](https://ww4.sinaimg.cn/large/006tKfTcgy1fevepnbf5ig30gz0aowev.gif)
 
 ### Installation
 
@@ -22,7 +22,7 @@ allprojects {
 **Step 2.** Add the dependency
 ```gradle
 dependencies {
-	compile 'com.github.xcc3641:watcher:0.4'
+	compile 'com.github.xcc3641:watcher:0.5'
 }
 ```
 
