@@ -1,6 +1,5 @@
 # Watcher
-[![](https://jitpack.io/v/xcc3641/watcher.svg)](https://jitpack.io/#xcc3641/watcher)
-
+[![](https://jitpack.io/v/xcc3641/watcher.svg)](https://jitpack.io/#xcc3641/watcher) [![Build Status](https://travis-ci.org/xcc3641/Watcher.svg?branch=master)](https://travis-ci.org/xcc3641/Watcher)
 ---
 
 ![](https://ww4.sinaimg.cn/large/006tKfTcgy1fevepnbf5ig30gz0aowev.gif)
