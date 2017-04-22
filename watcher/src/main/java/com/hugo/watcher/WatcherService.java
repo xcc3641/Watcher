@@ -1,7 +1,6 @@
 package com.hugo.watcher;
 
 import android.app.ActivityManager;
-import android.app.Application;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +17,7 @@ import android.widget.TextView;
 import com.hugo.watcher.config.AppBackground;
 import com.hugo.watcher.config.WatcherConfig;
 import com.hugo.watcher.config.WatcherListener;
+import com.hugo.watcher.function.Action1;
 import com.hugo.watcher.monitor.FpsMonitor;
 import com.hugo.watcher.monitor.MemoryMonitor;
 
@@ -33,6 +33,7 @@ public class WatcherService extends Service {
     private View mStageView;
     private TextView mTvFps;
     private TextView mTvMemory;
+    private TextView mTvCurrentActivity;
 
     private FpsMonitor mFpsMonitor;
     private MemoryMonitor mMemoryMonitor;
@@ -57,13 +58,15 @@ public class WatcherService extends Service {
         mWatcherConfig = intent.getParcelableExtra(WatcherConfig.CONFIG_KEY);
 
         if (mWatcherConfig != null && !mHasInitialized) {
-            ((Application) getApplicationContext()).registerActivityLifecycleCallbacks(AppBackground.init(getApplication()));
             initView();
             if (mWatcherConfig.enableFps) {
                 initFps();
             }
             if (mWatcherConfig.enableMemory) {
                 initMemory();
+            }
+            if (mWatcherConfig.enableShowCurrentActivity) {
+                initCurrentActivity();
             }
             mHasInitialized = true;
         }
@@ -122,6 +125,17 @@ public class WatcherService extends Service {
             }
         });
         mMemoryMonitor.start();
+    }
+
+    private void initCurrentActivity() {
+        mTvCurrentActivity = (TextView) mStageView.findViewById(R.id.tv_current_activity);
+        mTvCurrentActivity.setText(AppBackground.getInstance().getCurActivity().getClass().getSimpleName());
+        AppBackground.getInstance().setResumeAction(new Action1<String>() {
+            @Override
+            public void call(String name) {
+                mTvCurrentActivity.setText(name);
+            }
+        });
     }
 
     private void stop() {

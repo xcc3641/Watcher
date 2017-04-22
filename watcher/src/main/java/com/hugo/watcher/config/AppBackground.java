@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 import com.hugo.watcher.Watcher;
+import com.hugo.watcher.function.Action1;
+
+import java.util.Stack;
 
 /**
  * Created by HugoXie on 2016/12/3.
- *
+ * <p>
  * Email: Hugo3641@gmail.com
  * GitHub: https://github.com/xcc3641
  * Info:
@@ -19,6 +22,10 @@ public class AppBackground implements Application.ActivityLifecycleCallbacks {
     private static AppBackground sInstance;
     private int mCount = 0;
     private boolean mIsBackground = false;
+    private Stack<Activity> mActivityStack;
+
+
+    private Action1<String> mResumeAction;
 
     public static AppBackground init(Application app) {
         if (sInstance == null) {
@@ -27,13 +34,19 @@ public class AppBackground implements Application.ActivityLifecycleCallbacks {
         return sInstance;
     }
 
+    public static AppBackground getInstance() {
+        assert sInstance != null;
+        return sInstance;
+    }
+
     private AppBackground(Application app) {
+        mActivityStack = new Stack<>();
         app.registerActivityLifecycleCallbacks(this);
     }
 
     @Override
     public void onActivityCreated(Activity activity, Bundle bundle) {
-
+        mActivityStack.add(activity);
     }
 
     @Override
@@ -47,6 +60,9 @@ public class AppBackground implements Application.ActivityLifecycleCallbacks {
 
     @Override
     public void onActivityResumed(Activity activity) {
+        if (mResumeAction != null) {
+            mResumeAction.call(activity.getClass().getSimpleName());
+        }
     }
 
     @Override
@@ -70,6 +86,18 @@ public class AppBackground implements Application.ActivityLifecycleCallbacks {
 
     @Override
     public void onActivityDestroyed(Activity activity) {
+        mActivityStack.remove(activity);
+    }
 
+    public void setResumeAction(Action1<String> resumeAction) {
+        mResumeAction = resumeAction;
+    }
+
+    public Activity getCurActivity() {
+        if (mActivityStack.isEmpty()) {
+            return null;
+        } else {
+            return mActivityStack.get(mActivityStack.size() - 1);
+        }
     }
 }

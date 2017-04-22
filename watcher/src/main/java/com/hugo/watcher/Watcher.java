@@ -1,10 +1,12 @@
 package com.hugo.watcher;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
+import com.hugo.watcher.config.AppBackground;
 import com.hugo.watcher.config.WatcherConfig;
 
 public class Watcher {
@@ -46,6 +48,7 @@ public class Watcher {
                 return;
             }
         }
+        AppBackground.init((Application) context.getApplicationContext());
         Intent intent = new Intent(context, WatcherService.class);
         intent.putExtra(WatcherConfig.CONFIG_KEY, mWatcherConfig);
         context.startService(intent);

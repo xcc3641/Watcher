@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.IntDef;
 import android.view.Gravity;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -26,14 +27,19 @@ public class WatcherConfig implements Parcelable {
     public boolean enableMemory = true;
 
     /**
+     * 显示当前 Activity
+     */
+    public boolean enableShowCurrentActivity = true;
+
+    /**
      * 位置
      */
     @Seat
     public int seat = Seat.BOTTOM_LEFT;
 
     @IntDef({
-        Seat.TOP_RIGHT, Seat.TOP_LEFT, Seat.TOP_CENTER, Seat.BOTTOM_RIGHT, Seat.BOTTOM_LEFT, Seat.BOTTOM_CENTER,
-        Seat.RIGHT_CENTER, Seat.LEFT_CENTER, Seat.CENTER
+            Seat.TOP_RIGHT, Seat.TOP_LEFT, Seat.TOP_CENTER, Seat.BOTTOM_RIGHT, Seat.BOTTOM_LEFT, Seat.BOTTOM_CENTER,
+            Seat.RIGHT_CENTER, Seat.LEFT_CENTER, Seat.CENTER
     })
     @Retention(RetentionPolicy.SOURCE)
     public @interface Seat {
@@ -63,6 +69,7 @@ public class WatcherConfig implements Parcelable {
         dest.writeByte(this.isDebug ? (byte) 1 : (byte) 0);
         dest.writeByte(this.enableFps ? (byte) 1 : (byte) 0);
         dest.writeByte(this.enableMemory ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.enableShowCurrentActivity ? (byte) 1 : (byte) 0);
         dest.writeInt(this.seat);
     }
 
@@ -70,6 +77,7 @@ public class WatcherConfig implements Parcelable {
         this.isDebug = in.readByte() != 0;
         this.enableFps = in.readByte() != 0;
         this.enableMemory = in.readByte() != 0;
+        this.enableShowCurrentActivity = in.readByte() != 0;
         this.seat = in.readInt();
     }
 

@@ -15,4 +15,12 @@
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp"
         tools:text="2.4 MB" />
+
+    <TextView
+        android:id="@+id/tv_current_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp"
+        tools:text="MainActivity" />
 </merge>
