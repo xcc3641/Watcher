@@ -78,8 +78,8 @@ public class WatcherService extends Service {
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-//        layoutParams.type = WindowManager.LayoutParams.TYPE_TOAST; !!! See -->[](https://android.googlesource.com/platform/frameworks/base/+/dc24f93)
-        layoutParams.type = WindowManager.LayoutParams.TYPE_PHONE; // Make sure enable "Draw over other apps permission"
+        // !!! See -->[](https://android.googlesource.com/platform/frameworks/base/+/dc24f93)
+        layoutParams.type = mWatcherConfig.enableSkipPermission() ? WindowManager.LayoutParams.TYPE_TOAST : WindowManager.LayoutParams.TYPE_PHONE;
         layoutParams.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
         layoutParams.format = PixelFormat.TRANSLUCENT;

@@ -42,11 +42,9 @@ public class Watcher {
         if (!mWatcherConfig.isDebug) {
             return;
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!Settings.canDrawOverlays(context)) {
-                Log.e("Watcher", "!!! ---> Can't start Watcher : permission denied for window type");
-                return;
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(context)) {
+            Log.e("Watcher", "!!! ---> Can't start Watcher : permission denied for window type");
+            return;
         }
         AppBackground.init((Application) context.getApplicationContext());
         Intent intent = new Intent(context, WatcherService.class);

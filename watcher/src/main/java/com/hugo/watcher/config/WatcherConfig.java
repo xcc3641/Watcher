@@ -1,5 +1,6 @@
 package com.hugo.watcher.config;
 
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.IntDef;
@@ -30,6 +31,10 @@ public class WatcherConfig implements Parcelable {
      * 显示当前 Activity
      */
     public boolean enableShowCurrentActivity = true;
+
+    public boolean enableSkipPermission() {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M;
+    }
 
     /**
      * 位置
