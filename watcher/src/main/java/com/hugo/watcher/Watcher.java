@@ -3,7 +3,6 @@ package com.hugo.watcher;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
 import com.hugo.watcher.config.AppBackground;
@@ -42,7 +41,7 @@ public class Watcher {
         if (!mWatcherConfig.isDebug) {
             return;
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(context)) {
+        if (!mWatcherConfig.enableSkipPermission() && !Settings.canDrawOverlays(context)) {
             Log.e("Watcher", "!!! ---> Can't start Watcher : permission denied for window type");
             return;
         }

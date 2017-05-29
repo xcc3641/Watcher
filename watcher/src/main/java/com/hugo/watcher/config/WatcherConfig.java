@@ -33,7 +33,7 @@ public class WatcherConfig implements Parcelable {
     public boolean enableShowCurrentActivity = true;
 
     public boolean enableSkipPermission() {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M;
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.N;
     }
 
     /**
